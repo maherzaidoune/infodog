@@ -12,12 +12,15 @@ import {
   ScrollView,
   StatusBar,
   useColorScheme,
+  Text,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {useBatteryLevel} from './InfoDog';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
+  const batteryLevel = useBatteryLevel();
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -28,8 +31,9 @@ const App = () => {
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}
-      />
+        style={backgroundStyle}>
+        <Text>{batteryLevel}</Text>
+      </ScrollView>
     </SafeAreaView>
   );
 };

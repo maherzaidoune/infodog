@@ -14,6 +14,7 @@
 		44172758D81544533611DE4A /* libPods-infodog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D65DD239B3F20313D8FA5B89 /* libPods-infodog.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		93158C3FAA07ECC0F9C7FB1D /* libPods-infodog-infodogTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3A499B40A7541EF673F0462 /* libPods-infodog-infodogTests.a */; };
+		FA7A2640268CC85200FF3D52 /* InfoDogModule.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A263F268CC85200FF3D52 /* InfoDogModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		D43E01D20C3DC39F99D813FF /* Pods-infodog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-infodog.release.xcconfig"; path = "Target Support Files/Pods-infodog/Pods-infodog.release.xcconfig"; sourceTree = "<group>"; };
 		D65DD239B3F20313D8FA5B89 /* libPods-infodog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-infodog.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		FA7A263E268CC84700FF3D52 /* InfoDogModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoDogModule.h; sourceTree = "<group>"; };
+		FA7A263F268CC85200FF3D52 /* InfoDogModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoDogModule.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				FA7A263E268CC84700FF3D52 /* InfoDogModule.h */,
+				FA7A263F268CC85200FF3D52 /* InfoDogModule.m */,
 			);
 			name = infodog;
 			sourceTree = "<group>";
@@ -145,7 +150,6 @@
 				4D0B398B9C60FB5BADA92AD5 /* Pods-infodog-infodogTests.debug.xcconfig */,
 				C8887677EE431C668DAA6FC4 /* Pods-infodog-infodogTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -413,6 +417,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				FA7A2640268CC85200FF3D52 /* InfoDogModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +501,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.infodog;
 				PRODUCT_NAME = infodog;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -521,7 +526,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.infodog;
 				PRODUCT_NAME = infodog;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
