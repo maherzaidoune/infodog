@@ -13,6 +13,7 @@ import {
   StatusBar,
   useColorScheme,
   Text,
+  View,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
@@ -27,13 +28,11 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView style={{flex: 1}}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Text>{batteryLevel}</Text>
-      </ScrollView>
+      <View style={{backgroundColor: 'white', flex: 1}}>
+        <Text style={{color: '#000'}}>{batteryLevel}</Text>
+      </View>
     </SafeAreaView>
   );
 };

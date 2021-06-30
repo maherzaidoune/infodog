@@ -18,6 +18,11 @@
 // To export a module named InfoDogModule
 RCT_EXPORT_MODULE();
 
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[@"InfoDog_batteryLevelDidChange", @"InfoDog_batteryLevelIsLow", @"InfoDog_powerStateDidChange"];
+}
+
 - (void)startObserving {
     hasListeners = YES;
 }
@@ -26,12 +31,28 @@ RCT_EXPORT_MODULE();
     hasListeners = NO;
 }
 
-- (NSArray<NSString *> *)supportedEvents
+- (id)init
 {
-    return @[@"InfoDog_batteryLevelDidChange", @"InfoDog_batteryLevelIsLow", @"InfoDog_powerStateDidChange"];
+    if ((self = [super init])) {
+        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(batteryLevelDidChange:)
+                                                     name:UIDeviceBatteryLevelDidChangeNotification
+                                                   object: nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(powerStateDidChange:)
+                                                     name:UIDeviceBatteryStateDidChangeNotification
+                                                   object: nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(powerStateDidChange:)
+                                                     name:NSProcessInfoPowerStateDidChangeNotification
+                                                   object: nil];
+    }
+
+    return self;
 }
 
-_lowBatteryThreshold = 0.20;
 - (void) batteryLevelDidChange:(NSNotification *)notification {
     if (!hasListeners) {
         return;
@@ -84,27 +105,11 @@ RCT_EXPORT_METHOD(getBatteryLevel:(RCTPromiseResolveBlock)resolve rejecter:(RCTP
 //}
 
 - (NSDictionary *) powerState {
-#if RCT_DEV && (!TARGET_IPHONE_SIMULATOR) && !TARGET_OS_TV
-    if ([UIDevice currentDevice].isBatteryMonitoringEnabled != true) {
-        RCTLogWarn(@"Battery monitoring is not enabled. "
-                   "You need to enable monitoring with `[UIDevice currentDevice].batteryMonitoringEnabled = TRUE`");
-    }
-#endif
-#if RCT_DEV && TARGET_IPHONE_SIMULATOR && !TARGET_OS_TV
-    if ([UIDevice currentDevice].batteryState == UIDeviceBatteryStateUnknown) {
-        RCTLogWarn(@"Battery state `unknown` and monitoring disabled, this is normal for simulators and tvOS.");
-    }
-#endif
 
     return @{
-#if TARGET_OS_TV
-             @"batteryLevel": @1,
-             @"batteryState": @"full",
-#else
              @"batteryLevel": @([UIDevice currentDevice].batteryLevel),
              @"batteryState": [@[@"unknown", @"unplugged", @"charging", @"full"] objectAtIndex: [UIDevice currentDevice].batteryState],
              @"lowPowerMode": @([NSProcessInfo processInfo].isLowPowerModeEnabled),
-#endif
              };
 }
 
