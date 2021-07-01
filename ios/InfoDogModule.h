@@ -11,5 +11,4 @@
 #import <React/RCTEventEmitter.h>
 #import <React/RCTLog.h>
 @interface InfoDogModule : RCTEventEmitter <RCTBridgeModule>
-@property (nonatomic) float lowBatteryThreshold;
 @end

@@ -2,6 +2,7 @@
 
 package com.infodog.infodog;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -33,15 +34,19 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
 
     private BroadcastReceiver receiver;
 
-
     private double mLastBatteryLevel = -1;
     private String mLastBatteryState = "";
     private boolean mLastPowerSaveState = false;
+    private Double mLastBatteryTemperature = 0d;
 
 
     private static String LOW_POWER_MODE = "lowPowerMode";
     private static String BATTERY_STATE = "batteryState";
     private static String BATTERY_LEVEL= "batteryLevel";
+    private static String BATTERY_TECHNOLOGY= "batteryTechnology";
+    private static String BATTERY_TEMPERATURE= "batteryTemperature";
+
+
 
 
     public InfoDogModule(ReactApplicationContext context) {
@@ -51,7 +56,26 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
         reactContext = context;
     }
 
+    @ReactMethod
+    public void getBatteryLevel(Promise p) {
+        p.resolve(getBatteryLevel());
+    }
 
+    @ReactMethod
+    public void getPowerState(Promise p) {
+        p.resolve(getPowerState());
+    }
+
+    @ReactMethod
+    public Boolean getPowerSaveMode() {
+        return  mLastPowerSaveState;
+    }
+
+    @ReactMethod
+    public void getUsedMemory(Promise p) { p.resolve(getUsedMemory()); }
+
+    @ReactMethod
+    public void getTotalMemory(Promise p) { p.resolve(getTotalMemory()); }
 
     @Override
     public void initialize() {
@@ -75,23 +99,25 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
 
                 String batteryState = powerState.getString(BATTERY_STATE);
                 Double batteryLevel = powerState.getDouble(BATTERY_LEVEL);
+                Double batteryTemperature = powerState.getDouble(BATTERY_LEVEL);
                 Boolean powerSaveState = powerState.getBoolean(LOW_POWER_MODE);
-
-//                if(!mLastBatteryState.equalsIgnoreCase(batteryState) || mLastPowerSaveState != powerSaveState) {
-//                    sendEvent(getReactApplicationContext(), "InfoDog_powerStateDidChange", batteryState);
-//                    mLastBatteryState = batteryState;
-//                    mLastPowerSaveState = powerSaveState;
-//                }
 
                 if(mLastBatteryLevel != batteryLevel) {
                     emitDeviceEvent("InfoDog_batteryLevelDidChange", batteryLevel);
-
-//                    if(batteryLevel <= .15) {
-//                        sendEvent(getReactApplicationContext(), "InfoDog_batteryLevelIsLow", batteryLevel);
-//                    }
-
                     mLastBatteryLevel = batteryLevel;
                 }
+
+                if(mLastPowerSaveState != powerSaveState){
+                    emitDeviceEvent( "InfoDog_powerSaveModeDidChange", powerSaveState);
+                    mLastPowerSaveState = powerSaveState;
+                }
+
+                if(!mLastBatteryState.equalsIgnoreCase(batteryState) || mLastBatteryTemperature != batteryTemperature) {
+                    emitDeviceEvent( "InfoDog_powerStateDidChange", powerState);
+                    mLastBatteryState = batteryState;
+                    mLastBatteryTemperature = batteryTemperature;
+                }
+
             }
         };
 
@@ -126,9 +152,33 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
         return powerState.getDouble(BATTERY_LEVEL);
     }
 
-    @ReactMethod
-    public void getBatteryLevel(Promise p) {
-        p.resolve(getBatteryLevel());
+    private WritableMap getPowerState(){
+        Intent intent = getReactApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return getPowerStateFromIntent(intent);
+    }
+
+    public double getTotalMemory() {
+        ActivityManager.MemoryInfo manager = new ActivityManager.MemoryInfo();
+        ActivityManager activityManager = (ActivityManager) getReactApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        if (activityManager != null) {
+            activityManager.getMemoryInfo(manager);
+            return (double) manager.totalMem;
+        }
+        System.err.println("Can't get total memory");
+        return -1;
+    }
+
+    public double getUsedMemory() {
+        ActivityManager.MemoryInfo manager = new ActivityManager.MemoryInfo();
+        ActivityManager activityManager = (ActivityManager) getReactApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        if (activityManager != null) {
+            activityManager.getMemoryInfo(manager);
+            return (double) manager.totalMem - manager.availMem;
+        }
+        System.err.println("Can't get used memory");
+        return -1;
     }
 
     private static void emitDeviceEvent(String eventName, @Nullable Object eventData) {
@@ -146,6 +196,10 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
         int batteryScale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
         int isPlugged = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
         int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        //TODO add support to retrive more info from battery
+        float temperature = ((float) intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0)) / 10;
+        String technology = intent.getExtras().getString(BatteryManager.EXTRA_TECHNOLOGY);
+
 
         float batteryPercentage = batteryLevel / (float)batteryScale;
 
@@ -169,6 +223,9 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
         powerState.putString(BATTERY_STATE, batteryState);
         powerState.putDouble(BATTERY_LEVEL, batteryPercentage);
         powerState.putBoolean(LOW_POWER_MODE, powerSaveMode);
+        powerState.putString(BATTERY_TECHNOLOGY, technology);
+        powerState.putDouble(BATTERY_TEMPERATURE, temperature);
+
 
         return powerState;
     }

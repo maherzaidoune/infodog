@@ -1,16 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { NativeEventEmitter, NativeModules } from 'react-native';
+import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 
-
-const {InfoDogModule} = NativeModules;
-
-const getBatteryLevel = async (): Promise<number> => {
-    return InfoDogModule.getBatteryLevel();
-}
-
-const deviceInfoEmitter = new NativeEventEmitter(InfoDogModule);
-
-//Get real time batteryLevel updates
 export function useBatteryLevel(): number | null {
     const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
   
@@ -35,4 +25,117 @@ export function useBatteryLevel(): number | null {
     }, []);
   
     return batteryLevel;
-  }
+}
+//TODO: implement `InfoDog_usedMemoryDidChange` listener
+export function useUsedMemory(): number | null {
+  const [usedMemory, setUsedMemory] = useState<number | null>(null);
+
+  useEffect(() => {
+    const setInitialValue = async () => {
+      const initialValue: number = await getBatteryLevel();                
+      setUsedMemory(initialValue);
+    };
+
+    const onChange = (level: number) => {
+      setUsedMemory(level);
+    };
+
+    setInitialValue();
+
+    const subscription = deviceInfoEmitter.addListener(
+      'InfoDog_usedMemoryDidChange',
+      onChange
+    );
+
+    return () => subscription.remove();
+  }, []);
+
+  return usedMemory;
+}
+
+export function usePowerState(): Partial<PowerState> {
+  const [powerState, setPowerState] = useState<Partial<PowerState>>({});
+
+  useEffect(() => {
+    const setInitialValue = async () => {
+      const initialValue: Partial<PowerState> = await getPowerState();
+      setPowerState(initialValue);
+    };
+
+    const onChange = (state: PowerState) => {
+      setPowerState(state);
+    };
+
+    setInitialValue();
+
+    const subscription = deviceInfoEmitter.addListener(
+      'InfoDog_powerStateDidChange',
+      onChange
+    );
+
+    return () => subscription.remove();
+  }, []);
+
+  return powerState;
+}
+
+//Android ONLY
+export function usePowerSaveState(): Boolean {
+  const [powerSaveState, setPowerSaveState] = useState<Boolean>(false);
+
+  useEffect(() => {
+    const setInitialValue = () => {
+      const initialValue: Boolean = getPowerSaveState();                      
+      setPowerSaveState(initialValue);
+    };
+
+    const onChange = (level: Boolean) => {
+      setPowerSaveState(level);
+    };
+
+    setInitialValue();
+
+    const subscription = deviceInfoEmitter.addListener(
+      'InfoDog_powerSaveModeDidChange',
+      onChange
+    );
+
+    return () => subscription.remove();
+  }, []);
+
+  return powerSaveState;
+}
+
+//
+export const getBatteryLevel = async (): Promise<number> => {
+  return await InfoDogModule.getBatteryLevel();
+}
+
+export const getPowerState = async (): Promise<PowerState> => {
+  return await InfoDogModule.getPowerState();
+}
+
+export const getPowerSaveState = (): Boolean => {
+  return InfoDogModule.getPowerSaveMode();
+}
+
+export const getTotalMemory = async (): Promise<number> => {
+  return await InfoDogModule.getTotalMemory();
+}
+
+export const getUsedMemory = async (): Promise<number> => {
+  //returns current app usuage for ios and total used memory for android
+  return await InfoDogModule.getUsedMemory();
+}
+
+//
+const {InfoDogModule} = NativeModules;
+const deviceInfoEmitter = new NativeEventEmitter(InfoDogModule);
+type BatteryState = 'unknown' | 'unplugged' | 'charging' | 'full';
+interface PowerState {
+  batteryLevel: number;
+  batteryState: BatteryState;
+  lowPowerMode: boolean;
+  batteryTechnology?: string;
+  batteryTemperature?: number;
+}
