@@ -19,7 +19,7 @@ const MemoryIndicator = () => {
       {totalMemory.current && (
         <Pie
           fill={Math.floor((usedMemory / totalMemory.current) * 100)}
-          color={colors.safe}
+          color={colors.danger}
           icon={'memory'}
         />
       )}
