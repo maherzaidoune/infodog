@@ -47,8 +47,6 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
     private static String BATTERY_TEMPERATURE= "batteryTemperature";
 
 
-
-
     public InfoDogModule(ReactApplicationContext context) {
         // Pass in the context to the constructor and save it so you can emit events
         // https://facebook.github.io/react-native/docs/native-modules-android.html#the-toast-module

@@ -24,7 +24,7 @@ import {
   useBatteryLevel,
   usePowerSaveState,
   usePowerState,
-} from './InfoDog';
+} from './app/lib/InfoDog';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';

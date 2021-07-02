@@ -124,7 +124,6 @@ export const getTotalMemory = async (): Promise<number> => {
 }
 
 export const getUsedMemory = async (): Promise<number> => {
-  //returns current app usuage for ios and total used memory for android
   return await InfoDogModule.getUsedMemory();
 }
 
