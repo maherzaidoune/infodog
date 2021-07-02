@@ -14,8 +14,7 @@ const index = ({fill = 0, icon, color}) => {
       rotation={0}
       lineCap={'round'}
       tintColor={color}
-      backgroundColor={colors.secondary}
-      onAnimationComplete={() => console.log('onAnimationComplete')}>
+      backgroundColor={colors.secondary}>
       {() => <ExtraInfo fill={fill} icon={icon} color={color} />}
     </AnimatedCircularProgress>
   );
