@@ -8,15 +8,17 @@ import {
   View,
 } from 'react-native';
 import BatteryIndicator from './component/BatteryIndicator';
-import Pie from './component/Pie';
+import MemoryIndicator from './component/MemoryIndicator';
 import {colors} from './constants/colors';
-import {useBatteryLevel} from './lib/InfoDog';
 
 const Main = () => {
   return (
     <SafeAreaView>
       <View style={{backgroundColor: colors.background, flex: 1}}>
-        <BatteryIndicator />
+        <View style={{flex: 1, flexDirection: 'row'}}>
+          <BatteryIndicator />
+          <MemoryIndicator />
+        </View>
       </View>
     </SafeAreaView>
   );

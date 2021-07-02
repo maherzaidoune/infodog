@@ -33,7 +33,7 @@ export function useUsedMemory(): number | null {
 
   useEffect(() => {
     const setInitialValue = async () => {
-      const initialValue: number = await getBatteryLevel();                
+      const initialValue: number = await getUsedMemory();                      
       setUsedMemory(initialValue);
     };
 

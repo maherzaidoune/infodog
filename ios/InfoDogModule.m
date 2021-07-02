@@ -22,7 +22,7 @@ RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents
 {
-    return @[@"InfoDog_batteryLevelDidChange", @"InfoDog_powerStateDidChange",@"InfoDog_powerSaveModeDidChange",];
+    return @[@"InfoDog_batteryLevelDidChange", @"InfoDog_powerStateDidChange",@"InfoDog_powerSaveModeDidChange",@"InfoDog_usedMemoryDidChange",];
 }
 
 - (void)startObserving {

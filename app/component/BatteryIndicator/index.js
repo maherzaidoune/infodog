@@ -20,7 +20,7 @@ const BatteryIndicator = () => {
     <View style={styles.container}>
       <Pie
         fill={batteryLevel}
-        powerState={batteryState[powerState.batteryState]}
+        icon={batteryState[powerState.batteryState]}
         color={batteryLevel > threshold ? colors.safe : colors.danger}
       />
     </View>

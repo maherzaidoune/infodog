@@ -5,7 +5,7 @@ import {colors} from '../../constants/colors';
 import ExtraInfo from './ExtraInfo';
 import {styles} from './styles';
 
-const index = ({fill = 0, powerState, color}) => {
+const index = ({fill = 0, icon, color}) => {
   return (
     <AnimatedCircularProgress
       size={120}
@@ -16,7 +16,7 @@ const index = ({fill = 0, powerState, color}) => {
       tintColor={color}
       backgroundColor={colors.secondary}
       onAnimationComplete={() => console.log('onAnimationComplete')}>
-      {() => <ExtraInfo fill={fill} powerState={powerState} color={color} />}
+      {() => <ExtraInfo fill={fill} icon={icon} color={color} />}
     </AnimatedCircularProgress>
   );
 };
