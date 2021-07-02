@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "InfoDogModule.h"
 #import <DeviceCheck/DeviceCheck.h>
-
+#include <ifaddrs.h>
+#include <arpa/inet.h>
 
 @implementation InfoDogModule
 {
@@ -21,7 +22,7 @@ RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents
 {
-    return @[@"InfoDog_batteryLevelDidChange", @"InfoDog_powerStateDidChange"];
+    return @[@"InfoDog_batteryLevelDidChange", @"InfoDog_powerStateDidChange",@"InfoDog_powerSaveModeDidChange",];
 }
 
 - (void)startObserving {
@@ -158,6 +159,45 @@ RCT_EXPORT_METHOD(getTotalMemory:(RCTPromiseResolveBlock)resolve rejecter:(RCTPr
         return -1;
   }
 }
+
+
+//- (NSString *) getIpAddress {
+//    NSString *address = @"0.0.0.0";
+//    struct ifaddrs *interfaces = NULL;
+//    struct ifaddrs *temp_addr = NULL;
+//    int success = 0;
+//    // retrieve the current interfaces - returns 0 on success
+//    success = getifaddrs(&interfaces);
+//    if (success == 0) {
+//        // Loop through linked list of interfaces
+//        temp_addr = interfaces;
+//        while(temp_addr != NULL) {
+//            sa_family_t addr_family = temp_addr->ifa_addr->sa_family;
+//            // Check for IPv4 or IPv6-only interfaces
+//            if(addr_family == AF_INET || addr_family == AF_INET6) {
+//                NSString* ifname = [NSString stringWithUTF8String:temp_addr->ifa_name];
+//                    if(
+//                        [ifname isEqualToString:@"en0"]
+//                    ) {
+//                        const struct sockaddr_in *addr = (const struct sockaddr_in*)temp_addr->ifa_addr;
+//                        socklen_t addr_len = addr_family == AF_INET ? INET_ADDRSTRLEN : INET6_ADDRSTRLEN;
+//                        char addr_buffer[addr_len];
+//
+//                        char *netname = inet_ntop(addr_family, &addr->sin_addr, addr_buffer, addr_len);
+//
+//                        address = [NSString stringWithUTF8String:netname];
+//                    }
+//            }
+//            temp_addr = temp_addr->ifa_next;
+//        }
+//    }
+//    freeifaddrs(interfaces);
+//    return address;
+//}
+//
+//RCT_EXPORT_METHOD(getIpAddress:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+//    resolve(self.getIpAddress);
+//}
 
 
 - (NSDictionary *) powerState {

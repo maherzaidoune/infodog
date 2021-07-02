@@ -2,16 +2,17 @@ import { useCallback, useEffect, useState } from 'react';
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 
 export function useBatteryLevel(): number | null {
-    const [batteryLevel, setBatteryLevel] = useState<number | null>(null);
+    const [batteryLevel, setBatteryLevel] = useState<number | null>(0);
   
     useEffect(() => {
       const setInitialValue = async () => {
-        const initialValue: number = await getBatteryLevel();                
-        setBatteryLevel(initialValue);
+        const initialValue: number = await getBatteryLevel();     
+        if(initialValue === -1) setBatteryLevel(-1) // SIMULATOR
+        else setBatteryLevel(Math.floor(initialValue * 100));
       };
   
       const onChange = (level: number) => {
-        setBatteryLevel(level);
+        setBatteryLevel(Math.floor(level * 100));
       };
   
       setInitialValue();

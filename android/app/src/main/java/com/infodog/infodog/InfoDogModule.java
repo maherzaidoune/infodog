@@ -2,11 +2,15 @@
 
 package com.infodog.infodog;
 
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
 import android.os.PowerManager;
 
@@ -21,7 +25,13 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static android.os.BatteryManager.BATTERY_STATUS_CHARGING;
@@ -40,11 +50,11 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
     private Double mLastBatteryTemperature = 0d;
 
 
-    private static String LOW_POWER_MODE = "lowPowerMode";
-    private static String BATTERY_STATE = "batteryState";
-    private static String BATTERY_LEVEL= "batteryLevel";
-    private static String BATTERY_TECHNOLOGY= "batteryTechnology";
-    private static String BATTERY_TEMPERATURE= "batteryTemperature";
+    private static final String LOW_POWER_MODE = "lowPowerMode";
+    private static final String BATTERY_STATE = "batteryState";
+    private static final String BATTERY_LEVEL= "batteryLevel";
+    private static final String BATTERY_TECHNOLOGY= "batteryTechnology";
+    private static final String BATTERY_TEMPERATURE= "batteryTemperature";
 
 
     public InfoDogModule(ReactApplicationContext context) {
@@ -74,6 +84,12 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void getTotalMemory(Promise p) { p.resolve(getTotalMemory()); }
+
+//    @ReactMethod
+//    public void getIpAddress(Promise p) { p.resolve(getIpAddress()); }
+//
+//    @ReactMethod
+//    public void getMacAddress(Promise p) { p.resolve(getMacAddress()); }
 
     @Override
     public void initialize() {
@@ -155,7 +171,7 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
         return getPowerStateFromIntent(intent);
     }
 
-    public double getTotalMemory() {
+    private double getTotalMemory() {
         ActivityManager.MemoryInfo manager = new ActivityManager.MemoryInfo();
         ActivityManager activityManager = (ActivityManager) getReactApplicationContext()
                 .getSystemService(Context.ACTIVITY_SERVICE);
@@ -167,7 +183,7 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
         return -1;
     }
 
-    public double getUsedMemory() {
+    private double getUsedMemory() {
         ActivityManager.MemoryInfo manager = new ActivityManager.MemoryInfo();
         ActivityManager activityManager = (ActivityManager) getReactApplicationContext()
                 .getSystemService(Context.ACTIVITY_SERVICE);
@@ -177,6 +193,70 @@ public class InfoDogModule extends ReactContextBaseJavaModule {
         }
         System.err.println("Can't get used memory");
         return -1;
+    }
+
+    private WifiInfo getWifiInfo() {
+        WifiManager manager = (WifiManager) getReactApplicationContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        if (manager != null) {
+            return manager.getConnectionInfo();
+        }
+        return null;
+    }
+
+    private String getIpAddress() {
+        try {
+            return
+                    InetAddress.getByAddress(
+                            ByteBuffer
+                                    .allocate(4)
+                                    .order(ByteOrder.LITTLE_ENDIAN)
+                                    .putInt(getWifiInfo().getIpAddress())
+                                    .array())
+                            .getHostAddress();
+        } catch (Exception e) {
+            return "unknown";
+        }
+    }
+
+    @SuppressLint("HardwareIds")
+    private String getMacAddress() {
+        WifiInfo wifiInfo = getWifiInfo();
+        String macAddress = "";
+        if (wifiInfo != null) {
+            macAddress = wifiInfo.getMacAddress();
+        }
+
+        String permission = "android.permission.INTERNET";
+        int res = getReactApplicationContext().checkCallingOrSelfPermission(permission);
+
+        if (res == PackageManager.PERMISSION_GRANTED) {
+            try {
+                List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
+                for (NetworkInterface nif : all) {
+                    if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
+
+                    byte[] macBytes = nif.getHardwareAddress();
+                    if (macBytes == null) {
+                        macAddress = "";
+                    } else {
+
+                        StringBuilder res1 = new StringBuilder();
+                        for (byte b : macBytes) {
+                            res1.append(String.format("%02X:", b));
+                        }
+
+                        if (res1.length() > 0) {
+                            res1.deleteCharAt(res1.length() - 1);
+                        }
+
+                        macAddress = res1.toString();
+                    }
+                }
+            } catch (Exception ex) {
+                System.err.println("Can't get mac address " + ex.getMessage());
+            }
+        }
+        return macAddress;
     }
 
     private static void emitDeviceEvent(String eventName, @Nullable Object eventData) {
