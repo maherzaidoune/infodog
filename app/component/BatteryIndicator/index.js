@@ -12,7 +12,7 @@ const batteryState = {
   full: 'battery',
 };
 
-const threshold = 20;
+const threshold = 10;
 const BatteryIndicator = () => {
   const batteryLevel = useBatteryLevel();
   const powerState = usePowerState();

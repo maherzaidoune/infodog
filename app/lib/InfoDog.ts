@@ -27,32 +27,6 @@ export function useBatteryLevel(): number | null {
   
     return batteryLevel;
 }
-//TODO: implement `InfoDog_usedMemoryDidChange` listener
-export function useUsedMemory(): number | null {
-  const [usedMemory, setUsedMemory] = useState<number | null>(null);
-
-  useEffect(() => {
-    const setInitialValue = async () => {
-      const initialValue: number = await getUsedMemory();                      
-      setUsedMemory(initialValue);
-    };
-
-    const onChange = (level: number) => {
-      setUsedMemory(level);
-    };
-
-    setInitialValue();
-
-    const subscription = deviceInfoEmitter.addListener(
-      'InfoDog_usedMemoryDidChange',
-      onChange
-    );
-
-    return () => subscription.remove();
-  }, []);
-
-  return usedMemory;
-}
 
 export function usePowerState(): Partial<PowerState> {
   const [powerState, setPowerState] = useState<Partial<PowerState>>({});
@@ -80,7 +54,6 @@ export function usePowerState(): Partial<PowerState> {
   return powerState;
 }
 
-//Android ONLY
 export function usePowerSaveState(): Boolean {
   const [powerSaveState, setPowerSaveState] = useState<Boolean>(false);
 

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Bar from './component/Bar';
 import BatteryIndicator from './component/BatteryIndicator';
+import BatteryLevelBar from './component/BatteryLevelBar';
 import MemoryIndicator from './component/MemoryIndicator';
 import {colors} from './constants/colors';
 
@@ -22,7 +23,7 @@ const Main = () => {
           <MemoryIndicator />
         </View>
         <View style={{flex: 1}}>
-          <Bar />
+          <BatteryLevelBar />
         </View>
       </View>
     </SafeAreaView>

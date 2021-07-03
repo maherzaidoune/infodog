@@ -4,13 +4,17 @@ const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
+    paddingStart: 4,
+    paddingEnd: 4,
+  },
+  chartContainer: {
     height: WIDTH / 2,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
+  },
+  scrollContainer: {
+    // padding: 20,
   },
   barStyle: {
     height: WIDTH / 2,
-    padding: 5,
   },
 });
