@@ -33,9 +33,7 @@
 ## Project documentation
 
   ```
-  npm run doc
   npm run open
-
   ```
 
 ## Project documentation
