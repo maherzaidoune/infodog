@@ -8,6 +8,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
+    "pre-commit": "./node_modules/.bin/eslint .",
+    "pre-push": "npm test",
     "doc": "jsdoc -c jsdoc.json",
     "open": "concurrently \"http-server -a localhost -p 1234\" \"open http://localhost:1234/docs\""
   },
