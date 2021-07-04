@@ -1,9 +1,9 @@
 import React from 'react';
-import {View} from 'react-native';
-import {colors} from '../../constants/colors';
-import {useBatteryLevel, usePowerState} from '../../lib/InfoDog';
+import { View } from 'react-native';
+import { colors } from '../../constants/colors';
+import { useBatteryLevel, usePowerState } from '../../lib/InfoDog.ts';
 import Pie from '../Pie';
-import {styles} from './styles';
+import { styles } from './styles';
 
 const batteryState = {
   unknown: 'battery-unknown',

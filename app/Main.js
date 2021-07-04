@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
-import {SafeAreaView, StatusBar, View} from 'react-native';
+import React, { useEffect } from 'react';
+import { SafeAreaView, StatusBar, View } from 'react-native';
 import BatteryIndicator from './component/BatteryIndicator';
 import BatteryLevelBar from './component/BatteryLevelBar';
 import BatteryLevelLine from './component/BatteryLevelLine';
 import MemoryIndicator from './component/MemoryIndicator';
-import {styles} from './styles';
+import { styles } from './styles';
 
 const Main = () => {
   useEffect(() => {

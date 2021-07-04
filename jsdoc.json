@@ -1,0 +1,34 @@
+{
+    "tags": {
+        "allowUnknownTags": true
+    },
+    "source": {
+        "include": [
+            "./app"
+        ],
+        "includePattern": "\\.(jsx|js|ts|tsx)$"
+    },
+    "plugins": [
+        "plugins/markdown",
+        "better-docs/category",
+        "better-docs/component",
+        "better-docs/typescript"
+    ],
+    "opts": {
+        "encoding": "utf8",
+        "readme": "README.md",
+        "destination": "docs/",
+        "recurse": true,
+        "verbose": true,
+        "template": "./node_modules/better-docs"
+    },
+    "templates": {
+        "better-docs": {
+            "name": "Battery info Documentation",
+            "css": "jsdocstyle.css",
+            "hideGenerator": true
+        },
+        "search": true,
+        "monospaceLinks": true
+    }
+}

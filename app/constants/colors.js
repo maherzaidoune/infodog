@@ -1,4 +1,4 @@
-//TODO: add multi theme support
+// TODO: add multi theme support
 export const colors = {
   background: '#fff',
   main: '#774aa4',
