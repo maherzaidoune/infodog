@@ -1,24 +1,24 @@
 import React, {useEffect} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, StatusBar, View} from 'react-native';
 import BatteryIndicator from './component/BatteryIndicator';
 import BatteryLevelBar from './component/BatteryLevelBar';
 import BatteryLevelLine from './component/BatteryLevelLine';
 import MemoryIndicator from './component/MemoryIndicator';
-import {colors} from './constants/colors';
+import {styles} from './styles';
 
 const Main = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    StatusBar.setBarStyle('dark-content');
+  }, []);
   return (
-    <SafeAreaView style={{backgroundColor: colors.background, flex: 1}}>
-      <View style={{backgroundColor: colors.background, flex: 1}}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <BatteryIndicator />
-          <MemoryIndicator />
-        </View>
-        <View style={{flex: 2, justifyContent: 'space-evenly'}}>
-          <BatteryLevelBar />
-          <BatteryLevelLine />
-        </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.indicators}>
+        <BatteryIndicator />
+        <MemoryIndicator />
+      </View>
+      <View style={styles.charts}>
+        <BatteryLevelBar />
+        <BatteryLevelLine />
       </View>
     </SafeAreaView>
   );
