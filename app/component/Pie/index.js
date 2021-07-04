@@ -3,6 +3,10 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { colors } from '../../constants/colors';
 import ExtraInfo from './ExtraInfo';
 
+/**
+ * Circular progress component
+ * @module
+ */
 const index = ({ fill = 0, icon, color }) => (
   <AnimatedCircularProgress
     size={120}

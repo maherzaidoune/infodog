@@ -1,3 +1,4 @@
+/** @module InfoDog */
 import { useEffect, useState } from 'react';
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 
@@ -129,7 +130,11 @@ export const getUsedMemory = async (): Promise<number> => {
 //
 const {InfoDogModule} = NativeModules;
 const deviceInfoEmitter = new NativeEventEmitter(InfoDogModule);
+
+/** @type {BatteryState} */
 type BatteryState = 'unknown' | 'unplugged' | 'charging' | 'full';
+
+/** @type {PowerState} */
 interface PowerState {
   batteryLevel: number;
   batteryState: BatteryState;

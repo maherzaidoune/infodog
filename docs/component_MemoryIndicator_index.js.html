@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> component/MemoryIndicator/index.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -81,64 +83,62 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>component/MemoryIndicator/index.js</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>InfoDog Documentation</h1>
-<h2>Setup</h2>
-<ul>
-<li>clone the repository or copy the content of the InfoDog directory into «your directory»</li>
-<li>cd «your directory»</li>
-<li>npm i</li>
-<li>react-native link</li>
-<li>cd «ios»</li>
-<li>pod install</li>
-</ul>
-<h2>Start Metro Bundler</h2>
-<pre class="prettyprint source"><code>npm start
-</code></pre>
-<h2>Running on Android</h2>
-<pre class="prettyprint source"><code>react-native run-android
-adb reverse tcp:8081 tcp:8081   # required to ensure the Android app can access the Packager
-</code></pre>
-<h2>Running on iOS</h2>
-<pre class="prettyprint source"><code>react-native run-ios
-</code></pre>
-<h2>Project documentation</h2>
-<pre class="prettyprint source"><code>npm run doc
-npm run open
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect, useRef } from 'react';
+import { View } from 'react-native';
+import { colors } from '../../constants/colors';
+import { getUsedMemory, getTotalMemory } from '../../lib/InfoDog.ts';
+import Pie from '../Pie';
+import { styles } from './styles';
 
+/** @constant {number} */
+const frequency = 1000;
+
+/**
+ * Component for shows a circular progress of
+ * memory comsumption updated each 1s change event.
+ * @module
+ */
+
+const MemoryIndicator = () => {
+  const [usedMemory, setUsedMemory] = useState(0);
+  const totalMemory = useRef(null);
+  const interval = useRef(null);
+  useEffect(() => {
+    (async function IIFE() {
+      totalMemory.current = await getTotalMemory();
+    }());
+    interval.current = setInterval(() => {
+      // requesting setUsedMemory level each 1000 second
+      (async function IIFE() {
+        const memory = await getUsedMemory();
+        if (totalMemory.current) {
+          setUsedMemory(Math.floor((memory / totalMemory.current) * 100));
+        }
+      }());
+    }, frequency);
+    return () => clearInterval(interval.current);
+  }, []);
+
+  return (
+    &lt;View style={styles.container}>
+      &lt;Pie fill={usedMemory} color={colors.danger} icon="memory" />
+    &lt;/View>
+  );
+};
+export default React.memo(MemoryIndicator);
 </code></pre>
-<h2>Project documentation</h2>
-<pre class="prettyprint source"><code>
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 

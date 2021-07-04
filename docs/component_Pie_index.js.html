@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Home</title>
+  <title> component/Pie/index.js</title>
 
   <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -81,64 +83,43 @@
         <div class="core" id="main-content-wrapper">
             <div class="content">
                 <header class="page-title">
-                    <p></p>
-                    <h1>Home</h1>
+                    <p>Source</p>
+                    <h1>component/Pie/index.js</h1>
                 </header>
                 
 
 
 
     
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
     <section>
-        <article><h1>InfoDog Documentation</h1>
-<h2>Setup</h2>
-<ul>
-<li>clone the repository or copy the content of the InfoDog directory into «your directory»</li>
-<li>cd «your directory»</li>
-<li>npm i</li>
-<li>react-native link</li>
-<li>cd «ios»</li>
-<li>pod install</li>
-</ul>
-<h2>Start Metro Bundler</h2>
-<pre class="prettyprint source"><code>npm start
-</code></pre>
-<h2>Running on Android</h2>
-<pre class="prettyprint source"><code>react-native run-android
-adb reverse tcp:8081 tcp:8081   # required to ensure the Android app can access the Packager
-</code></pre>
-<h2>Running on iOS</h2>
-<pre class="prettyprint source"><code>react-native run-ios
-</code></pre>
-<h2>Project documentation</h2>
-<pre class="prettyprint source"><code>npm run doc
-npm run open
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { colors } from '../../constants/colors';
+import ExtraInfo from './ExtraInfo';
 
+/**
+ * Circular progress component
+ * @module
+ */
+const index = ({ fill = 0, icon, color }) => (
+  &lt;AnimatedCircularProgress
+    size={120}
+    width={15}
+    fill={fill}
+    rotation={0}
+    lineCap="round"
+    tintColor={color}
+    backgroundColor={colors.secondary}
+  >
+    {() => &lt;ExtraInfo fill={fill} icon={icon} color={color} />}
+  &lt;/AnimatedCircularProgress>
+);
+
+export default React.memo(index);
 </code></pre>
-<h2>Project documentation</h2>
-<pre class="prettyprint source"><code>
-</code></pre></article>
+        </article>
     </section>
-
-
 
 
 

@@ -6,6 +6,10 @@ import Dialog from 'react-native-dialog';
 import { Strings } from '../../constants/Strings';
 import { styles } from './styles';
 
+/**
+ * Component that let the user change the update's frequency.
+ * @module
+ */
 const ChartHelper = ({ frequency = 1, update = () => {} }) => {
   const [dialogVisible, setDialogVisible] = useState(false);
   const [value, setValue] = useState(frequency);

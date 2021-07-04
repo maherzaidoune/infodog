@@ -6,6 +6,10 @@ import {
 import { colors } from '../../constants/colors';
 import { styles } from './styles';
 
+/**
+ * Generic Line chart component
+ * @module
+ */
 const Line = ({ data = [], formatLabel = (label) => label }) => {
   const Yaxis = data.map((i) => Math.floor(i));
 

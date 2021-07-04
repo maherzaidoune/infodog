@@ -5,6 +5,10 @@ import ChartHelper from '../ChartHelper';
 import Line from '../Line';
 import { styles } from './styles';
 
+/**
+ * Component for shows a Line chart of real time battery level's update in `frequency` seconds.
+ * @module
+ */
 const BatteryLevelLine = () => {
   const batteryLevel = useBatteryLevel();
   const [data, setData] = useState([0]);

@@ -5,6 +5,10 @@ import Bar from '../Bar';
 import { styles } from '../BatteryLevelLine/styles';
 import ChartHelper from '../ChartHelper';
 
+/**
+ * Component for shows a Bar chart of real time battery level's update in `frequency` seconds.
+ * @module
+ */
 const BatteryLevelBar = () => {
   const batteryLevel = useBatteryLevel();
   const [data, setData] = useState([0]);
@@ -24,7 +28,6 @@ const BatteryLevelBar = () => {
   return (
     <View style={styles.container}>
       <ChartHelper frequency={frequency / 1000} update={setFrequency} />
-
       <Bar data={data} formatLabel={formatLabel} />
     </View>
   );

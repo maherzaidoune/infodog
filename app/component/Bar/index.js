@@ -4,12 +4,20 @@ import { BarChart, Grid, YAxis } from 'react-native-svg-charts';
 import { colors } from '../../constants/colors';
 import { styles } from './styles';
 
+/**
+ * Generic Bar chart component
+ * @module
+ */
 const Bar = ({ data = [], formatLabel = (label) => label }) => {
   const scrollview = useRef();
   const isScrolling = useRef(false);
 
   const Yaxis = data.map((i) => Math.floor(i));
 
+  /** @callback
+ * @name onUpdate
+ * autoscroll to last visible bar on new data rendred
+ * */
   const onUpdate = () => {
     // block autoscrolling when user scrolling so user can look into older metrics
     if (!isScrolling.current) {
@@ -17,10 +25,18 @@ const Bar = ({ data = [], formatLabel = (label) => label }) => {
     }
   };
 
+  /** @callback
+ * @name onScrollBegin
+ * Block autoscrolling if user is manually scrolling
+ * */
   const onScrollBegin = () => {
     isScrolling.current = true;
   };
 
+  /** @callback
+ * @name onScrollEnd
+ * enable autoscrolling again, wait for 1000ms before enabling autoscroll again
+ * */
   const onScrollEnd = () => {
     setTimeout(() => {
       isScrolling.current = false;
