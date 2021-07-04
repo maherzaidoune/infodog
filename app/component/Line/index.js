@@ -1,17 +1,25 @@
 import React from 'react';
-import {View} from 'react-native';
-import {LineChart, Grid, YAxis, XAxis} from 'react-native-svg-charts';
-import {colors} from '../../constants/colors';
-import {styles} from './styles';
+import { View } from 'react-native';
+import {
+  LineChart, Grid, YAxis,
+} from 'react-native-svg-charts';
+import { colors } from '../../constants/colors';
+import { styles } from './styles';
 
-const Line = ({data = [], formatLabel = label => label}) => {
-  const Yaxis = data.map(i => Math.floor(i));
+/**
+ * Generic Line chart component
+ * @module
+ */
+const Line = ({ data = [], formatLabel = (label) => label }) => {
+  const Yaxis = data.map((i) => Math.floor(i));
 
   return (
     <View style={styles.container}>
       <YAxis
         data={Yaxis}
-        contentInset={{top: 6, bottom: 10, left: 10, right: 0}}
+        contentInset={{
+          top: 6, bottom: 10, left: 10, right: 0,
+        }}
         numberOfTicks={11}
         svg={{
           fill: 'grey',
@@ -29,7 +37,8 @@ const Line = ({data = [], formatLabel = label => label}) => {
             strokeWidth: 2,
             strokeLinecap: 'round',
           }}
-          contentInset={{top: 0, left: 4, right: 0}}>
+          contentInset={{ top: 0, left: 4, right: 0 }}
+        >
           <Grid />
         </LineChart>
         {/* <XAxis

@@ -1,11 +1,15 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {View} from 'react-native';
-import {useBatteryLevel} from '../../lib/InfoDog';
+import React, { useEffect, useState, useRef } from 'react';
+import { View } from 'react-native';
+import { useBatteryLevel } from '../../lib/InfoDog.ts';
 import ChartHelper from '../ChartHelper';
 import Line from '../Line';
-import {styles} from './styles';
+import { styles } from './styles';
 
-const BatteryLevelLine = ({}) => {
+/**
+ * Component for shows a Line chart of real time battery level's update in `frequency` seconds.
+ * @module
+ */
+const BatteryLevelLine = () => {
   const batteryLevel = useBatteryLevel();
   const [data, setData] = useState([0]);
   const [frequency, setFrequency] = useState(1000);
@@ -13,16 +17,16 @@ const BatteryLevelLine = ({}) => {
 
   useEffect(() => {
     interval.current = setInterval(() => {
-      //update chart with latest battery level returned from native code;
+      // update chart with latest battery level returned from native code;
       setData([...data, batteryLevel]);
     }, frequency);
     return () => clearInterval(interval.current);
   });
 
-  const formatLabel = label => `${label}%`;
+  const formatLabel = (label) => `${label}%`;
 
   useEffect(() => {
-    //update data on batterylevel changes
+    // update data on batterylevel changes
   }, [batteryLevel]);
 
   return (

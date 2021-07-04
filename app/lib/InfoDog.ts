@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useState } from 'react';
+/** @module InfoDog */
+import { useEffect, useState } from 'react';
 import { NativeEventEmitter, NativeModules, Platform } from 'react-native';
 
 export function useBatteryLevel(): number | null {
@@ -80,23 +81,48 @@ export function usePowerSaveState(): Boolean {
   return powerSaveState;
 }
 
-//
+
+/**
+* Returns the device's battery level
+* @function getBatteryLevel
+* @returns {number}
+*/
 export const getBatteryLevel = async (): Promise<number> => {
   return await InfoDogModule.getBatteryLevel();
 }
 
+/**
+* Returns the device's power state
+* @function getPowerState
+* @returns {PowerState}
+*/
 export const getPowerState = async (): Promise<PowerState> => {
   return await InfoDogModule.getPowerState();
 }
 
+/**
+* Returns true if power save mode is enabled
+* @function getPowerSaveState
+* @returns {boolean}
+*/
 export const getPowerSaveState = (): Boolean => {
   return InfoDogModule.getPowerSaveMode();
 }
 
+/**
+* Returns the device's total RAM
+* @function getTotalMemory
+* @returns {number}
+*/
 export const getTotalMemory = async (): Promise<number> => {
   return await InfoDogModule.getTotalMemory();
 }
 
+/**
+* Returns the device's used RAM
+* @function getUsedMemory
+* @returns {number}
+*/
 export const getUsedMemory = async (): Promise<number> => {
   return await InfoDogModule.getUsedMemory();
 }
@@ -104,7 +130,11 @@ export const getUsedMemory = async (): Promise<number> => {
 //
 const {InfoDogModule} = NativeModules;
 const deviceInfoEmitter = new NativeEventEmitter(InfoDogModule);
+
+/** @type {BatteryState} */
 type BatteryState = 'unknown' | 'unplugged' | 'charging' | 'full';
+
+/** @type {PowerState} */
 interface PowerState {
   batteryLevel: number;
   batteryState: BatteryState;

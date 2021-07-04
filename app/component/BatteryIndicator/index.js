@@ -1,10 +1,15 @@
 import React from 'react';
-import {View} from 'react-native';
-import {colors} from '../../constants/colors';
-import {useBatteryLevel, usePowerState} from '../../lib/InfoDog';
+import { View } from 'react-native';
+import { colors } from '../../constants/colors';
+import { useBatteryLevel, usePowerState } from '../../lib/InfoDog.ts';
 import Pie from '../Pie';
-import {styles} from './styles';
+import { styles } from './styles';
 
+/**
+ * Enum for batteryState values.
+ * @readonly
+ * @enum {String}
+ */
 const batteryState = {
   unknown: 'battery-unknown',
   unplugged: 'power-plug-off',
@@ -12,7 +17,13 @@ const batteryState = {
   full: 'battery',
 };
 
+/** @constant {number} */
 const threshold = 10;
+
+/**
+ * Component for shows a circular progress of battery level updated on battery level's change event.
+ * @module
+ */
 const BatteryIndicator = () => {
   const batteryLevel = useBatteryLevel();
   const powerState = usePowerState();
@@ -26,4 +37,4 @@ const BatteryIndicator = () => {
     </View>
   );
 };
-export default React.memo(BatteryIndicator);
+export default BatteryIndicator;
