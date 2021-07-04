@@ -1,23 +1,9 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 import Pie from '.';
 
+import renderer from 'react-test-renderer';
 
-const setUp = () => {
-    const component = shallow(<Pie fill={50} icon={'test'} color={'red'}  />);
-    return component;
-};
-
-
-describe('Pie component', () => {
-    let component;
-
-    beforeEach(() => {
-        component = setUp();
-    });
-
-    it('should match to snapshot', () => {
-        expect(component).toMatchSnapshot();
-    })
-
-})
+test('renders correctly', () => {
+  const tree = renderer.create(<Pie fill={50} icon={'test'} color={'red'} />).toJSON();
+  expect(tree).toMatchSnapshot();
+});

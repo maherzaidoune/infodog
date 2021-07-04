@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={Object {}}
+>
+  <RNSVGSvgView
+    bbHeight={120}
+    bbWidth={120}
+    focusable={false}
+    height={120}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "borderWidth": 0,
+        },
+        Object {
+          "flex": 0,
+          "height": 120,
+          "width": 120,
+        },
+      ]
+    }
+    width={120}
+  >
+    <RNSVGGroup>
+      <RNSVGGroup
+        matrix={
+          Array [
+            1,
+            0,
+            -0,
+            1,
+            0,
+            0,
+          ]
+        }
+      >
+        <RNSVGPath
+          d="M 59.96701327930773 7.500010363084286 A 52.5 52.5 0 1 0 60 7.5"
+          fill={0}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+              "strokeLinecap",
+            ]
+          }
+          stroke={4293322470}
+          strokeLinecap={1}
+          strokeWidth={15}
+        />
+      </RNSVGGroup>
+    </RNSVGGroup>
+  </RNSVGSvgView>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderRadius": 45,
+        "height": 90,
+        "justifyContent": "center",
+        "left": 15,
+        "overflow": "hidden",
+        "position": "absolute",
+        "top": 15,
+        "width": 90,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "red",
+              "fontSize": 21,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Material Design Icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        ?
+      </Text>
+      <Text
+        style={
+          Object {
+            "fontSize": 17,
+            "fontWeight": "600",
+          }
+        }
+      >
+        50
+        %
+      </Text>
+    </View>
+  </View>
+</View>
+`;
