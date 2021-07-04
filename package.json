@@ -9,12 +9,12 @@
     "test": "jest",
     "lint": "eslint .",
     "doc": "jsdoc -c jsdoc.json",
-    "open": "concurrently \"http-server -a localhost -p 1234\" \"open http://localhost:1234/docs\"",
+    "open": "concurrently \"http-server -a localhost -p 1234\" \"open http://localhost:1234/docs\""
   },
   "husky": {
     "hooks": {
-      "precommit": "./node_modules/.bin/eslint . --fix",
-      "prepush": "npm test"
+      "pre-commit": "./node_modules/.bin/eslint . --fix",
+      "pre-push": "npm test"
     }
   },
   "dependencies": {

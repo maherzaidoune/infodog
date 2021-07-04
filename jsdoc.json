@@ -11,7 +11,6 @@
     "plugins": [
         "plugins/markdown",
         "better-docs/category",
-        "better-docs/component",
         "better-docs/typescript"
     ],
     "opts": {
