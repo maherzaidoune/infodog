@@ -23,8 +23,6 @@
     },
     "templates": {
         "better-docs": {
-            "name": "Battery info Documentation",
-            "css": "jsdocstyle.css",
             "hideGenerator": true
         },
         "search": true,

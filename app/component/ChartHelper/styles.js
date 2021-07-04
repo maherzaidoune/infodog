@@ -3,11 +3,18 @@ import { colors } from '../../constants/colors';
 
 export const styles = StyleSheet.create({
   container: {
-    height: 50,
+    height: 40,
     alignItems: 'flex-end',
     justifyContent: 'center',
     paddingEnd: 20,
     backgroundColor: colors.secondary,
-    marginBottom: 5,
+    marginBottom: 10,
+  },
+  update: {
+    flexDirection: 'row',
+  },
+  currentConfig: {
+    fontSize: 16,
+    paddingEnd: 5,
   },
 });

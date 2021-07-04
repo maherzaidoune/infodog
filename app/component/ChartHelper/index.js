@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import {
   View, Text, Platform, TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Dialog from 'react-native-dialog';
 import { Strings } from '../../constants/Strings';
 import { styles } from './styles';
+import { colors } from '../../constants/colors';
 
 /**
  * Component that let the user change the update's frequency.
@@ -24,10 +26,17 @@ const ChartHelper = ({ frequency = 1, update = () => {} }) => {
     <>
       <View style={styles.container}>
         <TouchableOpacity
+          style={styles.update}
           activeOpacity={0.1}
           onPress={() => setDialogVisible(true)}
         >
-          <Text>{`every ${frequency} seconds`}</Text>
+          <Text style={styles.currentConfig}>
+            {`every ${frequency} seconds`}
+            {' '}
+            <Icon name="gear" size={17} color={colors.main} />
+            {' '}
+
+          </Text>
         </TouchableOpacity>
       </View>
       <Dialog.Container visible={dialogVisible}>
