@@ -1,15 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-  Text,
-  View,
-} from 'react-native';
-import Bar from './component/Bar';
+import React, {useEffect} from 'react';
+import {SafeAreaView, View} from 'react-native';
 import BatteryIndicator from './component/BatteryIndicator';
 import BatteryLevelBar from './component/BatteryLevelBar';
+import BatteryLevelLine from './component/BatteryLevelLine';
 import MemoryIndicator from './component/MemoryIndicator';
 import {colors} from './constants/colors';
 
@@ -22,8 +15,9 @@ const Main = () => {
           <BatteryIndicator />
           <MemoryIndicator />
         </View>
-        <View style={{flex: 1}}>
+        <View style={{flex: 2, justifyContent: 'space-evenly'}}>
           <BatteryLevelBar />
+          <BatteryLevelLine />
         </View>
       </View>
     </SafeAreaView>

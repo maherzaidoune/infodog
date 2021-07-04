@@ -35,7 +35,7 @@ const Bar = ({data = [], formatLabel = label => label}) => {
     <View style={styles.container}>
       <YAxis
         data={Yaxis}
-        contentInset={{top: 0, bottom: 10, left: 10, right: 0}}
+        contentInset={{top: 10, bottom: 10, left: 10, right: 0}}
         svg={{
           fill: 'grey',
           fontSize: 10,
@@ -45,8 +45,7 @@ const Bar = ({data = [], formatLabel = label => label}) => {
       <ScrollView
         ref={scrollview}
         horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        removeClippedSubviews
+        showsHorizontalScrollIndicator
         onScrollBeginDrag={onScrollBegin}
         onScrollEndDrag={onScrollEnd}
         contentContainerStyle={styles.scrollContainer}>
@@ -55,7 +54,7 @@ const Bar = ({data = [], formatLabel = label => label}) => {
             style={[styles.barStyle, {width: data.length * 30}]}
             data={data}
             svg={{fill: colors.main}}
-            contentInset={{top: 0, left: 4, right: 0}}>
+            contentInset={{top: 10, left: 4, right: 0}}>
             <Grid />
           </BarChart>
         </View>

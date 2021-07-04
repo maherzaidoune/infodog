@@ -1,11 +1,11 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {View} from 'react-native';
 import {useBatteryLevel} from '../../lib/InfoDog';
-import Bar from '../Bar';
-import { styles } from '../BatteryLevelLine/styles';
 import ChartHelper from '../ChartHelper';
+import Line from '../Line';
+import {styles} from './styles';
 
-const BatteryLevelBar = ({}) => {
+const BatteryLevelLine = ({}) => {
   const batteryLevel = useBatteryLevel();
   const [data, setData] = useState([0]);
   const [frequency, setFrequency] = useState(1000);
@@ -21,13 +21,16 @@ const BatteryLevelBar = ({}) => {
 
   const formatLabel = label => `${label}%`;
 
+  useEffect(() => {
+    //update data on batterylevel changes
+  }, [batteryLevel]);
+
   return (
     <View style={styles.container}>
       <ChartHelper frequency={frequency / 1000} update={setFrequency} />
-
-      <Bar data={data} formatLabel={formatLabel} />
+      <Line data={data} formatLabel={formatLabel} />
     </View>
   );
 };
 
-export default BatteryLevelBar;
+export default BatteryLevelLine;

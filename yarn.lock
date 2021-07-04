@@ -4845,6 +4845,10 @@ react-native-create-bridge@^2.0.1:
     mkdirp-promise "^5.0.0"
     mz "^2.6.0"
 
+react-native-dialog@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-dialog/-/react-native-dialog-8.0.1.tgz#8e554c4d7ee755c9e20d43bb0c5bb1a158060e57"
+
 react-native-svg-charts@^5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/react-native-svg-charts/-/react-native-svg-charts-5.4.0.tgz#3817a4714c276b7024e60ae5c9f13191614aecc8"
