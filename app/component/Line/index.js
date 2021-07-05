@@ -20,7 +20,7 @@ const Line = ({ data = [], formatLabel = (label) => label }) => {
         contentInset={{
           top: 6, bottom: 10, left: 10, right: 0,
         }}
-        numberOfTicks={11}
+        numberOfTicks={10}
         svg={{
           fill: 'grey',
           fontSize: 10,

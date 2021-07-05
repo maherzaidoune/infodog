@@ -1,46 +1,58 @@
 # InfoDog Documentation
 
+## Getting started
 
-## Setup
+This project is a Device health application
 
-- clone the repository or copy the content of the InfoDog directory into «your directory»
-- cd «your directory»
-- npm i
-- react-native link
-- cd «ios»
-- pod install
+**Setup**
+
+```shell
+git clone
+cd infodog
+yarn
+```
+**Link assets**
+
+```shell
+react-native link
+```
+For iOS, install Cocoapods and run command
+
+```shell
+cd ios && pod install
+```
 
 ## Start Metro Bundler
 
-  ```
+  ```shell
   npm start
   ```
 
 ## Running on Android
 
-  ```
-  react-native run-android
+  ```shell
+  npx react-native run-android
   adb reverse tcp:8081 tcp:8081   # required to ensure the Android app can access the Packager
   ```
 
 
 ## Running on iOS
 
-  ```
-  react-native run-ios
+  ```shell
+  npx react-native run-ios
   ```
 
 ## Project documentation
 
-  ```
-  npm run doc
+  ```shell
   npm run open
-
   ```
 
-## Project documentation
-  ```
-  
-  ```
+## TODO
 
-
+- [ ] Add support for mere device's metrics
+- [ ] Add support for landscape mode
+- [ ] User can select charts to be displayed
+- [ ] Persist devices metrics to provide device' historic data
+- [ ] Track device's metrics when app killed to have more detailed and continuos device's health charts
+- [ ] Add support disable event listeners and request metrics on demand

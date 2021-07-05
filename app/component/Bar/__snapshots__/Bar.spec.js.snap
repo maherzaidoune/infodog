@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bar renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flexDirection": "row",
+      "paddingEnd": 4,
+      "paddingStart": 4,
+    }
+  }
+>
+  <View />
+  <RCTScrollView
+    contentContainerStyle={Object {}}
+    horizontal={true}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    showsHorizontalScrollIndicator={true}
+  >
+    <View>
+      <View
+        style={
+          Array [
+            Object {
+              "height": 375,
+            },
+            Object {
+              "width": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "height": 375,
+              },
+              Object {
+                "width": 0,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
