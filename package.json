@@ -45,6 +45,9 @@
     "babel-preset-react-native": "^4.0.1",
     "better-docs": "^2.3.2",
     "concurrently": "^6.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "eslint": "7.14.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.0",
@@ -57,6 +60,7 @@
     "jest-react-native": "^18.0.0",
     "jsdoc": "^3.6.7",
     "metro-react-native-babel-preset": "^0.64.0",
+    "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
     "typescript": "^4.3.4"
   },
@@ -64,6 +68,9 @@
     "preset": "jest-react-native",
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(react-clone-referenced-element|@react-native-community|react-navigation|@react-navigation/.*|@unimodules/.*|native-base|react-native-code-push)"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
