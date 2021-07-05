@@ -27,7 +27,11 @@ const BatteryLevelBar = () => {
 
   return (
     <View style={styles.container}>
-      <ChartHelper frequency={frequency / 1000} update={setFrequency} />
+      <ChartHelper
+        isTrackingEnabled={batteryLevel > 0}
+        frequency={frequency / 1000}
+        update={setFrequency}
+      />
       <Bar data={data} formatLabel={formatLabel} />
     </View>
   );

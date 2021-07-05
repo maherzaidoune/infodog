@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
   },
   chartContainer: {
     height: WIDTH / 2,
-    width: WIDTH,
+    width: WIDTH - 30,
   },
   scrollContainer: {
     // padding: 20,
