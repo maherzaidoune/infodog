@@ -105,31 +105,41 @@
 
     <section>
         <article><h1>InfoDog Documentation</h1>
-<h2>Setup</h2>
-<ul>
-<li>clone the repository or copy the content of the InfoDog directory into «your directory»</li>
-<li>cd «your directory»</li>
-<li>npm i</li>
-<li>react-native link</li>
-<li>cd «ios»</li>
-<li>pod install</li>
-</ul>
+<h2>Getting started</h2>
+<p>This project is a Device health application</p>
+<p><strong>Setup</strong></p>
+<pre class="prettyprint source lang-shell"><code>git clone
+cd infodog
+yarn
+</code></pre>
+<p><strong>Link assets</strong></p>
+<pre class="prettyprint source lang-shell"><code>react-native link
+</code></pre>
+<p>For iOS, install Cocoapods and run command</p>
+<pre class="prettyprint source lang-shell"><code>cd ios && pod install
+</code></pre>
 <h2>Start Metro Bundler</h2>
-<pre class="prettyprint source"><code>npm start
+<pre class="prettyprint source lang-shell"><code>npm start
 </code></pre>
 <h2>Running on Android</h2>
-<pre class="prettyprint source"><code>react-native run-android
+<pre class="prettyprint source lang-shell"><code>npx react-native run-android
 adb reverse tcp:8081 tcp:8081   # required to ensure the Android app can access the Packager
 </code></pre>
 <h2>Running on iOS</h2>
-<pre class="prettyprint source"><code>react-native run-ios
+<pre class="prettyprint source lang-shell"><code>npx react-native run-ios
 </code></pre>
 <h2>Project documentation</h2>
-<pre class="prettyprint source"><code>npm run open
+<pre class="prettyprint source lang-shell"><code>npm run open
 </code></pre>
-<h2>Project documentation</h2>
-<pre class="prettyprint source"><code>
-</code></pre></article>
+<h2>TODO</h2>
+<ul>
+<li>[ ] Add support for mere device's metrics</li>
+<li>[ ] Add support for landscape mode</li>
+<li>[ ] User can select charts to be displayed</li>
+<li>[ ] Persist devices metrics to provide device' historic data</li>
+<li>[ ] Track device's metrics when app killed to have more detailed and continuos device's health charts</li>
+<li>[ ] Add support disable event listeners and request metrics on demand</li>
+</ul></article>
     </section>
 
 
