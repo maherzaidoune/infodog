@@ -22,6 +22,11 @@ For iOS, install Cocoapods and run command
 cd ios && pod install
 ```
 
+for Android, add local.properties file to your android folder with your sdk path
+```shell
+sdk.dir=your_android_sdk_path
+```
+
 ## Start Metro Bundler
 
   ```shell
