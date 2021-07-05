@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { colors } from '../../constants/colors';
 import { useBatteryLevel, usePowerState } from '../../lib/InfoDog.ts';
 import Pie from '../Pie';
@@ -34,6 +34,8 @@ const BatteryIndicator = () => {
         icon={batteryState[powerState.batteryState]}
         color={batteryLevel > threshold ? colors.safe : colors.danger}
       />
+      {batteryLevel === -1
+      && <Text style={styles.runOnsimulator}>The app should be tested in a real device</Text>}
     </View>
   );
 };

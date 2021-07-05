@@ -8,4 +8,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  runOnsimulator: {
+    paddingStart: 7,
+    paddingEnd: 7,
+    paddingTop: 4,
+    textAlign: 'center',
+    fontSize: 10,
+  },
 });

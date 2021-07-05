@@ -37,17 +37,10 @@ const Line = ({ data = [], formatLabel = (label) => label }) => {
             strokeWidth: 2,
             strokeLinecap: 'round',
           }}
-          contentInset={{ top: 0, left: 4, right: 0 }}
+          contentInset={{ top: 0, left: 5, right: 0 }}
         >
           <Grid />
         </LineChart>
-        {/* <XAxis
-          style={{marginHorizontal: -10}}
-          data={[1, 2, 3]}
-          formatLabel={(value, index) => index}
-          contentInset={{left: 10, right: 10}}
-          svg={{fontSize: 10, fill: 'black'}}
-        /> */}
       </View>
     </View>
   );
