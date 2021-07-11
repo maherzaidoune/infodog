@@ -55,7 +55,7 @@ sdk.dir=your_android_sdk_path
 
 ## TODO
 
-- [ ] Add support for mere device's metrics
+- [ ] Add support for more device's metrics
 - [ ] Add support for landscape mode
 - [ ] User can select charts to be displayed
 - [ ] Persist devices metrics to provide device' historic data
